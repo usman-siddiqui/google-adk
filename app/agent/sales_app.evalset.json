@@ -1,0 +1,98 @@
+[
+  {
+    "name": "user_no_response",
+    "data": [
+      {
+        "query": "hi",
+        "expected_tool_use": [],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Hey Alice, thank you for filling out the form. I'd like to gather some information from you. Is that okay?"
+      },
+      {
+        "query": "no",
+        "expected_tool_use": [
+          {
+            "tool_name": "set_status",
+            "tool_input": {
+              "data": "{\"lead_id\":12,\"status\":\"no_response\"}"
+            }
+          }
+        ],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Alright, no problem. Have a great day!"
+      }
+    ],
+    "initial_session": {
+      "state": {},
+      "app_name": "agent",
+      "user_id": "user"
+    }
+  },
+  {
+    "name": "user_yes_response",
+    "data": [
+      {
+        "query": "hi",
+        "expected_tool_use": [],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Hey Alice, thank you for filling out the form. I'd like to gather some information from you. Is that okay?"
+      },
+      {
+        "query": "yes",
+        "expected_tool_use": [],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Great! Let's get started. \n\nFirst, can you please tell me your age?"
+      },
+      {
+        "query": "28",
+        "expected_tool_use": [
+          {
+            "tool_name": "save_data",
+            "tool_input": {
+              "data": "{\"lead_id\":12,\"name\":\"alice\",\"age\":28}"
+            }
+          }
+        ],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Thank you, Alice! Next, could you please tell me which country you are from?"
+      },
+      {
+        "query": "pak",
+        "expected_tool_use": [
+          {
+            "tool_name": "save_data",
+            "tool_input": {
+              "data": "{\"lead_id\":12,\"name\":\"alice\",\"age\":28,\"country\":\"pak\"}"
+            }
+          }
+        ],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Thank you for that information! Lastly, what product or service are you interested in?"
+      },
+      {
+        "query": "mobile",
+        "expected_tool_use": [
+          {
+            "tool_name": "save_data",
+            "tool_input": {
+              "data": "{\"lead_id\":12,\"name\":\"alice\",\"age\":28,\"country\":\"pak\",\"product\":\"mobile\"}"
+            }
+          },
+          {
+            "tool_name": "set_status",
+            "tool_input": {
+              "data": "{\"status\":\"secured\",\"lead_id\":12}"
+            }
+          }
+        ],
+        "expected_intermediate_agent_responses": [],
+        "reference": "Thank you so much for your responses, Alice! I have successfully gathered all the information, and your status has been secured. If you have any further questions or need assistance, feel free to ask!"
+      }
+    ],
+    "initial_session": {
+      "state": {},
+      "app_name": "agent",
+      "user_id": "user"
+    }
+  }
+]
